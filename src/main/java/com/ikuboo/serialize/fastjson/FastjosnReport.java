@@ -9,54 +9,30 @@ import com.ikuboo.serialize.utils.*;
  *
  */
 public class FastjosnReport implements Report {
-    private String simpleEntities_serialize;
 
-    public static void main(String[] args) {
-        SimpleEntity simpleEntity = TestHelper.initSimpleEntity();
-        ComplexEntity complexEntity = TestHelper.initComplexEntity();
+    public Result doReport(ComplexEntity entity, int loop, boolean warmup) {
+        long serializeTimeTotal = 0;
+        long deserializeTimeTotal = 0;
+        int serializeLen = 0;
 
-        //serialize
-        long begin = System.currentTimeMillis();
-        String simpleEntity_serialize = JSON.toJSONString(simpleEntity);
-        long end = System.currentTimeMillis() - begin;
-        System.out.println("简单对象序列化\t\ttime:" + end + ";length:" + simpleEntity_serialize.getBytes().length);
-
-
-
-        begin = System.currentTimeMillis();
-        String complexEntity_serialize = JSON.toJSONString(complexEntity);
-        end = System.currentTimeMillis() - begin;
-        System.out.println("复杂对象序列化\t\ttime:" + end + ";length:" + complexEntity_serialize.getBytes().length);
-
-
-
-        //unserialize
-        begin = System.currentTimeMillis();
-        SimpleEntity simpleEntity1 = JSONObject.parseObject(simpleEntity_serialize, SimpleEntity.class);
-        end = System.currentTimeMillis() - begin;
-        System.out.println("简单对象反序列化\t\ttime:" + end);
-
-
-        begin = System.currentTimeMillis();
-        ComplexEntity complexEntity1 = JSONObject.parseObject(complexEntity_serialize, ComplexEntity.class);
-        end = System.currentTimeMillis() - begin;
-        System.out.println("复杂对象反序列化\t\ttime:" + end);
-
-
-
-    }
-
-    public Result doReport(ComplexEntity entity, int loop) {
-
-
-        long begin = System.currentTimeMillis();
-        for (int i = 0; i < loop; i++) {
-
+        //预热
+        if(warmup){
+            String jsonStr = JSON.toJSONString(entity);
+            ComplexEntity obj = JSONObject.parseObject(jsonStr, ComplexEntity.class);
         }
-        long end = System.currentTimeMillis() - begin;
 
 
+        for (int i = 0; i < loop; i++) {
+            long begin = System.currentTimeMillis();
+            String str = JSON.toJSONString(entity);
+            serializeTimeTotal += System.currentTimeMillis() - begin;
 
-        return null;
+            begin = System.currentTimeMillis();
+            ComplexEntity entity1 = JSONObject.parseObject(str, ComplexEntity.class);
+            deserializeTimeTotal += System.currentTimeMillis() - begin;
+            serializeLen += str.getBytes().length;
+        }
+
+        return new Result(serializeTimeTotal / loop, serializeLen / loop, deserializeTimeTotal / loop);
     }
 }

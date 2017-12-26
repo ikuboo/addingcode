@@ -5,7 +5,11 @@
   <groupId>com.ikuboo</groupId>
   <artifactId>addingcode</artifactId>
   <version>1.0</version>
-  <packaging>jar</packaging>
+  <modules>
+    <module>datasource-switch</module>
+      <module>ObjectSize</module>
+  </modules>
+  <packaging>pom</packaging>
 
   <name>addingcode</name>
   <url>http://maven.apache.org</url>
@@ -139,5 +143,12 @@
         <artifactId>jmh-core</artifactId>
         <version>0.4.2</version>
     </dependency>
+    <!--druid DataSource-->
+    <dependency>
+      <groupId>com.alibaba</groupId>
+      <artifactId>druid</artifactId>
+      <version>1.0.5</version>
+    </dependency>
+
   </dependencies>
 </project>

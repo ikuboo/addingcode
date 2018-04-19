@@ -6,15 +6,12 @@ import com.google.common.cache.RemovalListener;
 import com.google.common.cache.RemovalListeners;
 import com.google.common.cache.RemovalNotification;
 import com.google.common.util.concurrent.AtomicLongMap;
+import com.sun.javafx.binding.StringFormatter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.*;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
@@ -24,6 +21,7 @@ import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicLong;
 
 /**
  * 秒级监控Demo
@@ -64,7 +62,31 @@ public class MonitorDemo {
                 .removalListener(
                         RemovalListeners.asynchronous(new RemovalListener<String, MateData>() {
                             public void onRemoval(RemovalNotification<String, MateData> notification) {
-                                System.out.println(String.format("threadName=%s,value=%s", Thread.currentThread().getName(), notification.getValue()));
+                                MateData value = notification.getValue();
+
+                                Map<String, Long> groupMap = value.getClientInvokerCounter().asMap();
+                                Map<Long, Long> tpMap = value.getTpTotalCounter().asMap();
+
+
+                                Date now = new Date();
+                                Date current = new Date(value.getCurrentTime() * 1000);
+
+                                SimpleDateFormat sdf = new SimpleDateFormat("mm:ss.SSS");
+
+                                System.out.println("-------------------------");
+                                System.out.println("当前时间:" + sdf.format(now));
+                                System.out.println("统计时间:" + sdf.format(current));
+
+                                for(String key : groupMap.keySet()){
+                                    System.out.println(key + ":" + groupMap.get(key));
+                                }
+
+                                System.out.println("all" + ":" + value.getProviderInvokeTotal().get());
+
+                                for(Long key : tpMap.keySet()){
+                                    System.out.println(key + ":" + tpMap.get(key));
+                                }
+
                             }
                         }, threadPool)
                 ).build();
@@ -99,9 +121,17 @@ public class MonitorDemo {
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
 
+        while (true){
+            long begin = System.currentTimeMillis();
+            Thread.sleep(new Random().nextInt(10));
+            if(new Random().nextInt(100) % 2 == 0){
+                monitor("com.ikuboo.monitor.MonitorDemo", "PC", begin);
+            }else {
+                monitor("com.ikuboo.monitor.MonitorDemo", "M", begin);
+            }
 
-
+        }
     }
 }

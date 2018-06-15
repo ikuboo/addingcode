@@ -20,6 +20,8 @@ public class Exercises1_1_6 {
     }
 
 
+
+
     public static void print(){
         int n1 = 0;
         int n2 = 1;

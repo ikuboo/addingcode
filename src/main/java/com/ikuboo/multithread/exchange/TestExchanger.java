@@ -1,4 +1,4 @@
-package com.ikuboo.multithread;
+package com.ikuboo.multithread.exchange;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

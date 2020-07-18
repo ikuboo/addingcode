@@ -165,12 +165,6 @@
       <version>3.4.2</version>
     </dependency>
 
-    <dependency>
-      <groupId>com.dianping.dpsf</groupId>
-      <artifactId>dpsf-net</artifactId>
-      <version>2.10.4.1</version>
-    </dependency>
-
     <!-- lombok -->
     <dependency>
       <groupId>org.projectlombok</groupId>
@@ -178,8 +172,17 @@
       <version>1.18.8</version>
       <scope>provided</scope>
     </dependency>
-
-
+    <dependency>
+      <groupId>org.redisson</groupId>
+      <artifactId>redisson</artifactId>
+      <version>3.12.3</version>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/de.ruedigermoeller/fst -->
+    <dependency>
+      <groupId>de.ruedigermoeller</groupId>
+      <artifactId>fst</artifactId>
+      <version>2.57</version>
+    </dependency>
   </dependencies>
 
   <build>
@@ -187,9 +190,10 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.1</version>
         <configuration>
-          <source>1.7</source>
-          <target>1.7</target>
+          <source>1.8</source>
+          <target>1.8</target>
         </configuration>
       </plugin>
     </plugins>

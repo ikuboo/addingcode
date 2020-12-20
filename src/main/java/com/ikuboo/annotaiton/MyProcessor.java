@@ -1,8 +1,7 @@
 package com.ikuboo.annotaiton;
 
-//import com.google.auto.service.AutoService;
-
 import com.google.auto.service.AutoService;
+import com.ikuboo.annotaiton.ann.MethodProcessor;
 
 import javax.annotation.processing.AbstractProcessor;
 import javax.annotation.processing.Filer;

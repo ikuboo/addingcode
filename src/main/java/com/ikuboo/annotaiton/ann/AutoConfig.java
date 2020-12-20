@@ -1,4 +1,4 @@
-package com.ikuboo.annotaiton;
+package com.ikuboo.annotaiton.ann;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;

@@ -1,11 +1,9 @@
 package com.ikuboo.guava.future;
 
 import com.google.common.util.concurrent.*;
-import com.sun.istack.internal.Nullable;
 
 import java.io.IOException;
 import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
@@ -33,7 +31,7 @@ public class ListenableFutureDemo2 {
         //callback方式
         Futures.addCallback(future, new FutureCallback<String>() {
             @Override
-            public void onSuccess(@Nullable String result) {
+            public void onSuccess( String result) {
                 System.out.println("callback result: "+result+ getThreadName());
             }
 

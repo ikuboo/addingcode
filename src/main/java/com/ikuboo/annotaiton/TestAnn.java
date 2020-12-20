@@ -1,4 +1,4 @@
-package com.ikuboo.ann;
+package com.ikuboo.annotaiton;
 
 /**
  * Created by Administrator on 2018/1/30 0030.

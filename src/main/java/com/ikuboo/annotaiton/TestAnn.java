@@ -1,4 +1,6 @@
-package com.ikuboo.ann;
+package com.ikuboo.annotaiton;
+
+import com.ikuboo.annotaiton.ann.MyAnn;
 
 /**
  * Created by Administrator on 2018/1/30 0030.

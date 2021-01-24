@@ -19,7 +19,7 @@ public class SortedMapTest {
     }
 
     public void test1(){
-        SortedMap<Person, String> sortedMap = new TreeMap<>();
+        SortedMap<Person, String> sortedMap = new TreeMap<Person, String>();
         sortedMap.put(new Person(10), "s-10");
         sortedMap.put(new Person(30), "s-30");
         sortedMap.put(new Person(20), "s-20");
@@ -29,7 +29,7 @@ public class SortedMapTest {
 
 
     public void test2(){
-        SortedMap<Person, String> sortedMap = new TreeMap<>();
+        SortedMap<Person, String> sortedMap = new TreeMap<Person, String>();
         sortedMap.put(new Person(10), "s-10");
         sortedMap.put(new Person(30), "s-30");
         sortedMap.put(new Person(20), "s-20");
@@ -44,7 +44,7 @@ public class SortedMapTest {
         System.out.println(sortedMap.tailMap(new Person(50)));//大于等于
     }
     public void test3(){
-        NavigableMap<Person, String> navigableMap = new TreeMap<>();
+        NavigableMap<Person, String> navigableMap = new TreeMap<Person, String>();
         navigableMap.put(new Person(10), "s-10");
         navigableMap.put(new Person(30), "s-30");
         navigableMap.put(new Person(20), "s-20");

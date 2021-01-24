@@ -31,7 +31,7 @@ import java.util.concurrent.atomic.AtomicLong;
 public class MonitorDemo {
     private static final Logger logger = LoggerFactory.getLogger(MonitorDemo.class);
 
-    private static final BlockingQueue<MateData> blockingQueue = new LinkedBlockingQueue<>(10000);
+    private static final BlockingQueue<MateData> blockingQueue = new LinkedBlockingQueue<MateData>(10000);
 
     private static final ThreadPoolExecutor threadPool;
 

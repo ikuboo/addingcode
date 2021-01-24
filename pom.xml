@@ -236,8 +236,8 @@
                             <version>1.0-rc6</version>
                         </path>
                     </annotationProcessorPaths>
-                    <source>6</source>
-                    <target>6</target>
+                    <source>8</source>
+                    <target>8</target>
                 </configuration>
             </plugin>
         </plugins>
